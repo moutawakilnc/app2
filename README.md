@@ -1,0 +1,6 @@
+# APP REDUX 1
+
+
+TP: APP REDUX 1:  GENERAL CONCEPTS.
+
+By: N.Moutawakil
