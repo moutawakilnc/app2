@@ -8,7 +8,7 @@ function List()
     
     const list=useSelector((state)=>state.list);
     const dispatch=useDispatch();
-    console.log("UI List Update");
+    console.log("UI List Updates");
     return (
         <table className="table">
             <thead>
