@@ -1,38 +1,50 @@
-import { useStore } from "react-redux";
-import { useSelector,useDispatch } from "react-redux";
-import personneReducer from "../../stateApi/reducer/personneReducer";
-import { checkDate } from "../../stateApi/mlw";
 
-function List()
+import { useSelector,useDispatch } from "react-redux";
+
+import { majTout } from "../../reducer/formReducer";
+import { deleteInscription ,selectInscriptionState} from "../../reducer/inscriptionReducer";
+import { Link } from "react-router-dom";
+
+function List({isMaj,isDel})
 {
-    
-    const list=useSelector((state)=>state.list);
+
+    const inscriptionState=useSelector(selectInscriptionState);
+    var isMaj=isMaj;//1= oui
+    var isDel=isDel; //1 = oui
     const dispatch=useDispatch();
-    console.log("UI List Updates");
     return (
+        <div className="col-12 col-sm-10">
         <table className="table">
             <thead>
                 <tr>
                 <td>Id</td>
                 <th>Nom</th>
                 <th>date naissance</th>
-                <th>#</th>
-                <th>#</th>
+                {isMaj&&<th>#</th>}
+                {isDel&&<th>supprimer</th>}
                 </tr>
             </thead>
         <tbody>
-            {list.map((e,i)=>{
+  
+            {inscriptionState.map((e,index)=>{
                 //var j=i;
-                return (<tr key={i}>
+                return (<tr key={index}>
+                   
+                     
             <td>{e.id}</td>
-            <td>{e.name}</td>
+            <td><Link to={"/inscriptions/"+index}>{e.name}</Link></td>
             <td>{e.dateNaissance}</td>
-            <td><li onClick={(a)=>{dispatch({type:"MAJ_ALL",payload:{id:e.id,name:e.name,dateNaissance:e.dateNaissance}})}}></li></td>
-            <td><li onClick={(a)=>{dispatch({type:"DELETE_PERSONNE",payload:{id:i}})}}></li></td>
+            {isMaj&&<td>
+                <Link to={"/editer/"+index}>Modifier</Link>
+             </td>}
+            
+           
+            
+         
             </tr>)})}
         </tbody>
         
-        </table>);
+        </table></div>);
 
 }
 
