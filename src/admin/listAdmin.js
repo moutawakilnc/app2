@@ -9,8 +9,8 @@ export  const ListAdmin =()=>{
 return(<List> 
         <Datagrid> 
         
-            <DatagridTextView source="id"/>
-            <DatagridTextView source="name"/>
+            <TextField source="id"/>
+            
         </Datagrid>
         </List>
 )

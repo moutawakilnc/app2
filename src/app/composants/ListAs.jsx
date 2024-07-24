@@ -23,7 +23,6 @@ function ListAs()
                 </tr>
             </thead>
         <tbody>
-      {console.log(data)}
             {data?.map((e,index)=>{
                 //var j=i;
                 return (<tr key={index}>

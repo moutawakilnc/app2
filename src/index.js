@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Root from './routes/Root';
 import ErrorPage from './routes/ErrorPage';
-import LoginPage from './routes/LoginPage';
+import LoginPage from './admin/LoginPage';
 import reportWebVitals from './reportWebVitals';
 import Inscription from './app/composants/Inscription';
 import Appback from './admin/Appback';
@@ -22,12 +22,13 @@ import {
 import { selectFormState } from './reducer/formReducer';
 import ListAs from './app/composants/ListAs';
 import { loadData,CheckLogin } from './commonFnc';
+import Header from './routes/Header';
 
 
 const router=createBrowserRouter([
   
   {path:'/',
-    element: <Appback />,//<Provider store={store}><Root /></Provider>,
+    element: <Root/>,
     errorElement:<ErrorPage />,
     children:[
       {
@@ -84,7 +85,8 @@ const router=createBrowserRouter([
       },
       {
         path:"admins",
-        element: <Appback />
+        element: <Appback/>,
+        
       }
     ]
   }
@@ -93,7 +95,7 @@ const router=createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  {<RouterProvider router={router}/>
+  {<Provider store={store}><RouterProvider router={router}/></Provider>
 }
     </React.StrictMode>
 );

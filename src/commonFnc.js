@@ -1,6 +1,6 @@
 
 import { Navigate } from "react-router";
-import LoginPage from "./routes/LoginPage";
+import LoginPage from "./admin/LoginPage";
 export const checkDayMonth = (a,type="d") => {
   try{
     a=Number(a);
@@ -22,7 +22,24 @@ export const checkDayMonth = (a,type="d") => {
     return data;
   }
 
-  export const CheckLogin=()=>1!=1?<LoginPage />:<Navigate to="/" />
+  export const CheckLogin=()=>1==1?<LoginPage />:<Navigate to="/admins" />
 
 
+  export const isLogged=()=>1==1?true:false;
+
+
+
+  const checkCredentials= (storeData)=> (next)=> async (action)=>{
+
+    if(action.type=="login/toggleConnection")
+    {
+      const checkLogins=await fetch("http://localhost:3001/admins").then(response=>response.json()).then(jsonData=>jsonData.admins);
+  
+      checkLogins.map((e)=>e.pseudo==action.payload.pseudo)
+      
+  
+    }
+  
+  
+  }
   

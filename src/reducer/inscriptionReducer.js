@@ -36,6 +36,7 @@ export const inscriptionSlice=createSlice({
     return state.map((element,i)=>i==index?obj:element);
   }
 
+  
   }
 })
 
