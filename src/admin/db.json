@@ -1,0 +1,9 @@
+{
+    "admins":
+    [{"id":1,"name":"abc","motDePasse":"abc"},
+    
+    {"id":2,"pseudo":"xx","name":2,"motDePasse":"abc"}]
+
+
+
+}

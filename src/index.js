@@ -12,6 +12,7 @@ import ErrorPage from './routes/ErrorPage';
 import LoginPage from './routes/LoginPage';
 import reportWebVitals from './reportWebVitals';
 import Inscription from './app/composants/Inscription';
+import Appback from './admin/Appback';
 import { majInscriptionAction } from './routes/actionHandler';
 import {
   createBrowserRouter,
@@ -26,7 +27,7 @@ import { loadData,CheckLogin } from './commonFnc';
 const router=createBrowserRouter([
   
   {path:'/',
-    element: <Provider store={store}><Root /></Provider>,
+    element: <Appback />,//<Provider store={store}><Root /></Provider>,
     errorElement:<ErrorPage />,
     children:[
       {
@@ -80,6 +81,10 @@ const router=createBrowserRouter([
       {
         path:"login",
         element: <CheckLogin />
+      },
+      {
+        path:"admins",
+        element: <Appback />
       }
     ]
   }
