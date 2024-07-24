@@ -33,7 +33,7 @@ export const inscriptionSlice=createSlice({
     let obj=action.payload.data;
     let index=obj.index;
     delete obj.index;
-    return state.map((element,i)=>i==index?obj:element);
+    return state.map((element,i)=>i==indx?obj:element);
   }
 
   }
