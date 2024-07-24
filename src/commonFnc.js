@@ -23,4 +23,6 @@ export const checkDayMonth = (a,type="d") => {
   }
 
   export const CheckLogin=()=>1!=1?<LoginPage />:<Navigate to="/" />
+
+
   

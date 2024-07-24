@@ -1,5 +1,5 @@
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 /* all related logic to a slice/reducer into reducer file */
 const ADD_PERS="ADD_PERSONNE";
@@ -30,13 +30,10 @@ export const inscriptionSlice=createSlice({
   },
   majInscription:(state,action)=>
   {
-    
-    console.log(action.payload);
-    console.log("state", state)
-      state[action.payload.index]={id:action.payload.id,
-        name:action.payload.name,dateNaissance:action.payload.dateNaissance,
-        bio:""
-      };
+    let obj=action.payload.data;
+    let index=obj.index;
+    delete obj.index;
+    return state.map((element,i)=>i==index?obj:element);
   }
 
   }

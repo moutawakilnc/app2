@@ -55,9 +55,7 @@ const router=createBrowserRouter([
         path:"editer/:index",
         loader:({params})=>
           {
-              console.log("store.getState().inscription", store.getState().inscription)
-              console.log("store.getState().inscription", store.getState().inscription[params.index])
-             return  store.getState().inscription[params.index];
+             return  {...store.getState().inscription[params.index],index:params.index};
           },
         element:
         <div className=''>

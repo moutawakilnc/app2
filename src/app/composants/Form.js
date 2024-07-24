@@ -4,29 +4,33 @@ import { majId,majName,majDateNaissance,selectFormState } from "../../reducer/fo
 import { addInscription, majInscription } from "../../reducer/inscriptionReducer";
 import { useForm,SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate} from "react-router";
 import { useLoaderData } from "react-router";
 
 
 function Form({isMaj})
 {
     const selectForm=useSelector(selectFormState);
-    console.log("ba1")
     const {id,name,dateNaissance,index}=useLoaderData();
 
-    console.log(id)
     var isMaj=isMaj;//true = maj-> disable input till click
     
-    const nav=useNavigate();
-
+   const nav=useNavigate();
     const {register,handleSubmit,formState:{errors}}=useForm();
     
 
 
     const onSubmit=(data)=>{
-        console.log(isMaj)
-        !isMaj?dispatch(addInscription({...data,bio:''})):
-        dispatch(majInscription({...data,index:index}));
+        
+        if(!isMaj)
+        {   dispatch(addInscription({...data,bio:''}));
+            nav("/inscriptions");
+        }
+        else
+        {
+            dispatch(majInscription({data}));
+            nav("/editer");
+        }
     }
 
     const dispatch=useDispatch();
@@ -36,7 +40,7 @@ function Form({isMaj})
                 <div className="form-group  ">
                    
                     <label htmlFor="idInput">Id</label>
-
+                <input type="hidden" value={index} {...register("index")} name="index"/>
                     <input defaultValue={
                         isMaj&&id} 
                         

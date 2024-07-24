@@ -10,12 +10,24 @@ const resetIndex=(storeData)=>(next)=>(action)=>{
   if(action.type=="inscription/majInscription")
     {
       storeData.dispatch({type:'form/majIndex'});
-      
     }
     
   return act;
 
 }
+
+const redirectionToListe=(storeData)=>(next)=>(action)=>{
+  
+  const act=next(action);
+  if(action.type=="inscription/majInscription")
+    {
+      storeData.dispatch({type:'form/majIndex'});
+    }
+    
+  return act;
+
+}
+
 
 export const store = configureStore({
   reducer: {
