@@ -3,14 +3,20 @@ import { useSelector,useDispatch } from "react-redux";
 
 import { majTout } from "../../reducer/formReducer";
 import { deleteInscription ,selectInscriptionState} from "../../reducer/inscriptionReducer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function List({isMaj,isDel})
 {
-
+    const authState=useSelector((state)=>state.auth)
     const inscriptionState=useSelector(selectInscriptionState);
+
+    const index=useParams();
+
     var isMaj=isMaj;//1= oui
     var isDel=isDel; //1 = oui
+
+    
+
     const dispatch=useDispatch();
     return (
         <div className="col-12 col-sm-10">
@@ -37,6 +43,10 @@ function List({isMaj,isDel})
             {isMaj&&<td>
                 <Link to={"/editer/"+index}>Modifier</Link>
              </td>}
+             {isDel&&<td>
+                    <Link to={"/supprimer/"+index}>Supprimer</Link>
+                </td>}
+             
             
            
             

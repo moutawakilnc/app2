@@ -13,16 +13,17 @@ import LoginPage from './admin/LoginPage';
 import reportWebVitals from './reportWebVitals';
 import Inscription from './app/composants/Inscription';
 import Appback from './admin/Appback';
-import { majInscriptionAction } from './routes/actionHandler';
+import {  deconnexionLoader,deleteLoader } from './routes/crudLoaders';
 import {
   createBrowserRouter,
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { selectFormState } from './reducer/formReducer';
 import ListAs from './app/composants/ListAs';
-import { loadData,CheckLogin } from './commonFnc';
-import Header from './routes/Header';
+import { AddresseCheckComposant } from './routes/PrivateRoute';
+import { useSelector } from 'react-redux';
+
+
 
 
 const router=createBrowserRouter([
@@ -31,6 +32,10 @@ const router=createBrowserRouter([
     element: <Root/>,
     errorElement:<ErrorPage />,
     children:[
+      {
+        index:true,
+        element:<p>Accueil</p>
+      },
       {
         path:"inscriptions",
         element:<List />,
@@ -48,30 +53,39 @@ const router=createBrowserRouter([
         path:"ajouter",
         loader:()=>{ return {id:-1,name:"",dateNaissance:""}}
         ,
-        element:<Form mode="0"/>
+        element:<AddresseCheckComposant element={<Form mode="0"/>} />
       },{
         path:"editer",
-        element:<List isMaj={true}/>
+        element:
+        <AddresseCheckComposant element={<List isMaj={true}/>} />
+        
       },
       {
         path:"editer/:index",
         loader:({params})=>
           {
+            console.log(params);
              return  {...store.getState().inscription[params.index],index:params.index};
           },
         element:
-        <div className=''>
-            <Form isMaj={true}/>
-        </div>,
+            <AddresseCheckComposant element={<Form isMaj={true}/>} />
+   
        
+      },
+      {
+        path:"supprimer/:index/",
+        element:<AddresseCheckComposant element={<List isDel={true}/>}/>,
+        loader:({params})=>deleteLoader(params)
       },
       {
         path:"supprimer",
         element:
         <div className=''>
-         <List isDel={true}></List>
+          
+          <AddresseCheckComposant element={<List isDel={true}/>}/>
         </div>
       },
+      
       {
         path:"data",
         element:
@@ -81,11 +95,15 @@ const router=createBrowserRouter([
       },
       {
         path:"login",
-        element: <CheckLogin />
+        element: <LoginPage />
+      },
+      {
+        path:"deconnexion",
+        loader:deconnexionLoader,
       },
       {
         path:"admins",
-        element: <Appback/>,
+        element:  <AddresseCheckComposant element={<Appback/>}  />
         
       }
     ]

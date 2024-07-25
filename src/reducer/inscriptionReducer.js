@@ -1,10 +1,8 @@
 
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 /* all related logic to a slice/reducer into reducer file */
-const ADD_PERS="ADD_PERSONNE";
-const MAJ_PERS="MAJ_PERSONNE";
-const DEL_PERS="DELETE_PERSONNE";
+
 
 
 const  initialState=[
@@ -24,9 +22,12 @@ export const inscriptionSlice=createSlice({
       state.push(action.payload);
     },
   deleteInscription:(state,action)=>
-  {
-  
-    return state.filter((item,index)=>action.payload!==index)
+  { 
+    return state.filter((item,index)=>
+      {
+        
+         return action.payload!=index
+  })
   },
   majInscription:(state,action)=>
   {
@@ -45,4 +46,6 @@ export default inscriptionSlice.reducer;
 export const {addInscription,deleteInscription,majInscription}=inscriptionSlice.actions;
 
 export const selectInscriptionState=(state)=>state.inscription;
+
+
 

@@ -2,12 +2,17 @@
 import './Header.scss';
 import { Link } from 'react-router-dom';
 import img from './klipartz.com.png';
+import { useDispatch } from 'react-redux';
+import { deleteAdminSession } from '../reducer/authReducer';
+import { useEffect } from 'react';
 
 
-
-
-export default function Header()
+export default function Header({isConnected})
 {
+    
+    const dispatch=useDispatch();
+
+ 
     return (<nav  className="navbar navbar-expand-md">
             <div className="container-md">
                 <a className="navbar-brand d-flex align-items-center " href="#">
@@ -21,7 +26,7 @@ export default function Header()
                 <div id="navbarNav" class="collapse navbar-collapse">
                 <ul className="navbar-nav navbar-nav-scroll d-md-flex flex-md-row justify-content-center">
                     <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">Accueil</a>
+                    <a className="nav-link" aria-current="page" href="#">Accueil</a>
                     </li>
                    
                     <li className="nav-item dropdown">
@@ -35,8 +40,17 @@ export default function Header()
                         </ul>
                     </li>
                     <li className='nav-item'>
-                        <Link to={`data`}>Data</Link>
+                        <Link className="nav-link"  to={`data`}>Data</Link>
                     </li>
+                   
+                    {!(isConnected===true)?
+                    <li className='nav-item float-left'>
+                        <Link className="nav-link"  to={`login`}>se connecter</Link>
+                    </li>:<li className='nav-item aligns-self-right'>
+                        
+                    <Link className="nav-link"  to={`deconnexion`}>se deconnecter</Link>
+                    </li>
+                    }
                 
                 </ul>
 

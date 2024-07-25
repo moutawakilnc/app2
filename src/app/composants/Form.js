@@ -1,18 +1,14 @@
-import React, { useEffect } from "react"
-import { useDispatch,useSelector } from "react-redux"
-import { majId,majName,majDateNaissance,selectFormState } from "../../reducer/formReducer";
+import React from "react"
+import { useDispatch } from "react-redux"
 import { addInscription, majInscription } from "../../reducer/inscriptionReducer";
 import { useForm,SubmitHandler } from "react-hook-form";
-import { useState } from "react";
 import { useNavigate} from "react-router";
 import { useLoaderData } from "react-router";
 
 
 function Form({isMaj})
 {
-    const selectForm=useSelector(selectFormState);
     const {id,name,dateNaissance,index}=useLoaderData();
-
     var isMaj=isMaj;//true = maj-> disable input till click
     
    const nav=useNavigate();
@@ -21,9 +17,9 @@ function Form({isMaj})
 
 
     const onSubmit=(data)=>{
-        
         if(!isMaj)
-        {   dispatch(addInscription({...data,bio:''}));
+        {   
+            dispatch(addInscription({...data,bio:''}));
             nav("/inscriptions");
         }
         else
